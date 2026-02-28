@@ -21,7 +21,21 @@ const TRANSLATIONS = {
             "Дякую за те, що ти є в моєму житті 💝",
             "Твої очі — мій улюблений всесвіт 🌌❤️",
             "Кожна думка про тебе гріє мені душу ☕💖",
-            "Я завжди буду поруч, незважаючи ні на що 🤝❤️"
+            "Я завжди буду поруч, незважаючи ні на що 🤝❤️",
+            "Обіцяю віддавати тобі останній шматочок піци 🍕😏",
+            "Буду любити тебе, навіть якщо ти з'їси мої смаколики 🍫🙄",
+            "Обіцяю сміятися з твоїх жартів, навіть не дуже смішних 😅❤️",
+            "Твій масаж — це святе (але і ти мені зробиш) 🦶✨",
+            "Я люблю тебе більше, ніж спати до обіду 🛌💖",
+            "Обіцяю терпіти твої музичні смаки, які ти мені надсилаєш 🚗🎧",
+            "Ти мій улюблений головний біль 🤕💘",
+            "Обіцяю ділитися ковдрою (ну, хоча б 30% ковдри) 🥶💕",
+            "Люблю тебе так сильно, що готовий дивитися з тобою мелодрами та серіали 🍿😭",
+            "З тобою навіть похід в магазин за хлібом — це пригода 🛒✨",
+            "Обіцяю відповідати на повідомлення швидше (ну, або хоча б намагатися) 📱💨",
+            "Знайду більше часу для твоїх дзвінків і нескінченних історій 📞💕",
+            "Хочу частіше грати з тобою в Roblox і Minecraft... сумую за нашими безсонними ночами 🎮🥺",
+            "Обіцяю підтримувати тебе, коли ти плачеш (навіть якщо ти плачеш через дурниці) 🤧💖"
         ]
     },
     en: {
@@ -46,7 +60,21 @@ const TRANSLATIONS = {
             "Thank you for being in my life 💝",
             "Your eyes are my favorite universe 🌌❤️",
             "Every thought of you warms my soul ☕💖",
-            "I will always be there, no matter what 🤝❤️"
+            "I will always be there, no matter what 🤝❤️",
+            "I promise to give you the last slice of pizza 🍕😏",
+            "I will love you even if you eat my snacks 🍫🙄",
+            "I promise to laugh at your jokes, even the bad ones 😅❤️",
+            "Your massages are sacred (but you owe me one) 🦶✨",
+            "I love you more than sleeping until noon 🛌💖",
+            "I promise to tolerate your music that you send me 🚗🎧",
+            "You are my favorite headache 🤕💘",
+            "I promise to share the blanket (at least 30% of it) 🥶💕",
+            "I love you so much I'm willing to watch melodramas and series with you 🍿😭",
+            "Even going to the store for bread is an adventure with you 🛒✨",
+            "I promise to reply to your messages faster (well, or at least try to) 📱💨",
+            "I will find more time for your calls and endless stories 📞💕",
+            "I want to play Roblox and Minecraft with you more often... I miss our sleepless nights 🎮🥺",
+            "I promise to support you when you cry (even if you're crying over nonsense) 🤧💖"
         ]
     }
 };
@@ -150,8 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedCardIndex = null;
         gameActive = false;
 
-        // Generate an array of indices [0...14] and shuffle them
-        const indices = Array.from({ length: 15 }, (_, i) => i);
+        // Generate an array of indices [0...totalSentences.length-1] and shuffle them
+        const totalSentences = TRANSLATIONS[currentLang].sentences.length;
+        const indices = Array.from({ length: totalSentences }, (_, i) => i);
         indices.sort(() => 0.5 - Math.random());
 
         // Save the first 9 shuffled indices so we can translate them on-the-fly later
