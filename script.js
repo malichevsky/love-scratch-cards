@@ -9,7 +9,7 @@ const TRANSLATIONS = {
         sentences: [
             "Ти найкраще, що траплялося зі мною ❤️",
             "Твоя усмішка робить мій день яскравішим ✨",
-            "Я кохаю тебе більше, ніж учора, але менше, ніж завтра 💖",
+            "Я кохаю тебе більше, ніж учора, а там як карта ляже 💖",
             "Відстань ніщо, коли ти поруч у моєму серці 🌍💕",
             "Ти моя найрідніша людина 🫂❤️",
             "З тобою кожна мить особлива 🌟",
@@ -25,7 +25,7 @@ const TRANSLATIONS = {
             "Обіцяю віддавати тобі останній шматочок піци 🍕😏",
             "Буду любити тебе, навіть якщо ти з'їси мої смаколики 🍫🙄",
             "Обіцяю сміятися з твоїх жартів, навіть не дуже смішних 😅❤️",
-            "Твій масаж — це святе (але і ти мені зробиш) 🦶✨",
+            "Твій масаж — це святе (але і ти мені зробиш, почухаєш спинку?) 🦶✨",
             "Я люблю тебе більше, ніж спати до обіду 🛌💖",
             "Обіцяю терпіти твої музичні смаки, які ти мені надсилаєш 🚗🎧",
             "Ти мій улюблений головний біль 🤕💘",
@@ -34,6 +34,8 @@ const TRANSLATIONS = {
             "З тобою навіть похід в магазин за хлібом — це пригода 🛒✨",
             "Обіцяю відповідати на повідомлення швидше (ну, або хоча б намагатися) 📱💨",
             "Знайду більше часу для твоїх дзвінків і нескінченних історій 📞💕",
+            "Я теж буду дивитися в Rave все що завгодно (навіть якщо ти будеш засинати) 😴💕",
+            "У мене постійно сни про тебе (навіть якщо не дуже пристойні) 💭💖",
             "Хочу частіше грати з тобою в Roblox і Minecraft... сумую за нашими безсонними ночами 🎮🥺",
             "Обіцяю підтримувати тебе, коли ти плачеш (навіть якщо ти плачеш через дурниці) 🤧💖"
         ]
@@ -48,7 +50,7 @@ const TRANSLATIONS = {
         sentences: [
             "You are the best thing that ever happened to me ❤️",
             "Your smile brightens my day ✨",
-            "I love you more than yesterday, but less than tomorrow 💖",
+            "I love you more than yesterday, and I'll love you more tomorrow 💖",
             "Distance is nothing when you're in my heart 🌍💕",
             "You are my dearest person 🫂❤️",
             "Every moment with you is special 🌟",
@@ -73,6 +75,8 @@ const TRANSLATIONS = {
             "Even going to the store for bread is an adventure with you 🛒✨",
             "I promise to reply to your messages faster (well, or at least try to) 📱💨",
             "I will find more time for your calls and endless stories 📞💕",
+            "I will also watch anything on Rave with you (even if you fall asleep) 😴💕",
+            "I constantly have dreams about you (even if they are not very appropriate) 💭💖",
             "I want to play Roblox and Minecraft with you more often... I miss our sleepless nights 🎮🥺",
             "I promise to support you when you cry (even if you're crying over nonsense) 🤧💖"
         ]
