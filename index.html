@@ -15,15 +15,18 @@
 
 <body>
     <div class="app-container">
+        <div class="lang-switcher">
+            <button id="lang-btn" class="lang-btn">🇺🇦 UA</button>
+        </div>
         <header class="header">
-            <h1>Для мого кохання ❤️</h1>
-            <p class="subtitle">Вибери одну картку і дізнайся, що я відчуваю... 💝</p>
+            <h1 id="title-text">Для мого кохання ❤️</h1>
+            <p id="subtitle-text" class="subtitle">Вибери одну картку і дізнайся, що я відчуваю... 💝</p>
         </header>
 
         <div class="game-area">
             <!-- Start overlay -->
             <div id="start-screen" class="overlay active">
-                <button id="start-btn" class="primary-btn">Почати гру 💖</button>
+                <button id="start-btn" class="primary-btn"><span id="start-text">Почати гру</span> 💖</button>
             </div>
 
             <!-- Grid container for cards -->
@@ -34,7 +37,7 @@
             <!-- Result/Restart overlay -->
             <div id="result-screen" class="overlay hidden">
                 <p id="result-text" class="romantic-text"></p>
-                <button id="restart-btn" class="secondary-btn">Ще раз 💘</button>
+                <button id="restart-btn" class="secondary-btn"><span id="restart-text">Ще раз</span> 💘</button>
             </div>
         </div>
 

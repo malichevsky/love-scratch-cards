@@ -1,23 +1,60 @@
-const LOVE_SENTENCES = [
-    "Ти найкраще, що траплялося зі мною ❤️",
-    "Твоя усмішка робить мій день яскравішим ✨",
-    "Я кохаю тебе більше, ніж учора, але менше, ніж завтра 💖",
-    "Відстань ніщо, коли ти поруч у моєму серці 🌍💕",
-    "Ти моя найрідніша людина 🫂❤️",
-    "З тобою кожна мить особлива 🌟",
-    "Моє серце належить тільки тобі 💘",
-    "Я сумую за тобою щосекунди 🥺❤️",
-    "Ти робиш мене найщасливішою людиною у світі 🥰",
-    "Моя любов до тебе не має меж ♾️💖",
-    "Ти — моя мрія, яка стала реальністю ✨💕",
-    "Дякую за те, що ти є в моєму житті 💝",
-    "Твої очі — мій улюблений всесвіт 🌌❤️",
-    "Кожна думка про тебе гріє мені душу ☕💖",
-    "Я завжди буду поруч, незважаючи ні на що 🤝❤️"
-];
+const TRANSLATIONS = {
+    ua: {
+        title: "Для мого кохання ❤️",
+        subtitle_start: "Вибери одну картку і дізнайся, що я відчуваю... 💝",
+        subtitle_scratch: "Зітри одну картку пальцем... ✨",
+        start_btn: "Почати гру",
+        scratch_text: "Зітри мене",
+        restart_btn: "Ще раз",
+        sentences: [
+            "Ти найкраще, що траплялося зі мною ❤️",
+            "Твоя усмішка робить мій день яскравішим ✨",
+            "Я кохаю тебе більше, ніж учора, але менше, ніж завтра 💖",
+            "Відстань ніщо, коли ти поруч у моєму серці 🌍💕",
+            "Ти моя найрідніша людина 🫂❤️",
+            "З тобою кожна мить особлива 🌟",
+            "Моє серце належить тільки тобі 💘",
+            "Я сумую за тобою щосекунди 🥺❤️",
+            "Ти робиш мене найщасливішою людиною у світі 🥰",
+            "Моя любов до тебе не має меж ♾️💖",
+            "Ти — моя мрія, яка стала реальністю ✨💕",
+            "Дякую за те, що ти є в моєму житті 💝",
+            "Твої очі — мій улюблений всесвіт 🌌❤️",
+            "Кожна думка про тебе гріє мені душу ☕💖",
+            "Я завжди буду поруч, незважаючи ні на що 🤝❤️"
+        ]
+    },
+    en: {
+        title: "For My Love ❤️",
+        subtitle_start: "Choose a card and see how I feel... 💝",
+        subtitle_scratch: "Scratch a card with your finger... ✨",
+        start_btn: "Start Game",
+        scratch_text: "Scratch Me",
+        restart_btn: "Play Again",
+        sentences: [
+            "You are the best thing that ever happened to me ❤️",
+            "Your smile brightens my day ✨",
+            "I love you more than yesterday, but less than tomorrow 💖",
+            "Distance is nothing when you're in my heart 🌍💕",
+            "You are my dearest person 🫂❤️",
+            "Every moment with you is special 🌟",
+            "My heart belongs only to you 💘",
+            "I miss you every second 🥺❤️",
+            "You make me the happiest person in the world 🥰",
+            "My love for you has no limits ♾️💖",
+            "You are a dream come true ✨💕",
+            "Thank you for being in my life 💝",
+            "Your eyes are my favorite universe 🌌❤️",
+            "Every thought of you warms my soul ☕💖",
+            "I will always be there, no matter what 🤝❤️"
+        ]
+    }
+};
 
+let currentLang = 'ua';
 let gameActive = false;
 let selectedCardIndex = null;
+let currentShuffledSentences = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     const startScreen = document.getElementById('start-screen');
@@ -26,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const restartBtn = document.getElementById('restart-btn');
     const floatingHeartsContainer = document.getElementById('floating-hearts');
+    const langBtn = document.getElementById('lang-btn');
 
     function createFloatingHearts() {
         const heartCount = 15;
@@ -39,10 +77,55 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function toggleLanguage() {
+        currentLang = currentLang === 'ua' ? 'en' : 'ua';
+        langBtn.textContent = currentLang === 'ua' ? '🇺🇦 UA' : '🇬🇧 EN';
+        updateUIText();
+
+        // If cards are currently generated, we need to translate their hidden text
+        if (currentShuffledSentences.length > 0) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                const inner = card.querySelector('.card-inner');
+                if (inner) {
+                    // Find the original index of this sentence in the TRANSLATIONS array
+                    const originalSentenceIndex = currentShuffledSentences[index];
+                    inner.textContent = TRANSLATIONS[currentLang].sentences[originalSentenceIndex];
+
+                    // Note: HTML5 Canvas text cannot be updated easily once drawn without redrawing the whole scratch layer.
+                    // Instead of redrawing the canvas and losing the user's progress if they are scratching,
+                    // we accept that the "Зітри мене / Scratch Me" canvas text stays in the language it was generated in.
+                }
+            });
+
+            // If the result screen is showing, update that sentence too
+            if (resultScreen.classList.contains('active')) {
+                const activeCardInner = document.querySelector('.card.selected .card-inner');
+                if (activeCardInner) {
+                    document.getElementById('result-text').textContent = activeCardInner.textContent;
+                }
+            }
+        }
+    }
+
+    function updateUIText() {
+        const t = TRANSLATIONS[currentLang];
+        document.getElementById('title-text').textContent = t.title;
+        document.getElementById('start-text').textContent = t.start_btn;
+        document.getElementById('restart-text').textContent = t.restart_btn;
+
+        if (gameActive) {
+            document.getElementById('subtitle-text').textContent = t.subtitle_scratch;
+        } else {
+            document.getElementById('subtitle-text').textContent = t.subtitle_start;
+        }
+    }
+
     function init() {
         createFloatingHearts();
         startBtn.addEventListener('click', startGame);
         restartBtn.addEventListener('click', resetGame);
+        langBtn.addEventListener('click', toggleLanguage);
     }
 
     function startGame() {
@@ -58,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             cards.forEach(card => card.classList.remove('shuffling'));
             gameActive = true;
-            document.querySelector('.subtitle').textContent = "Зітри одну картку пальцем... ✨";
+            document.getElementById('subtitle-text').textContent = TRANSLATIONS[currentLang].subtitle_scratch;
         }, 1200);
     }
 
@@ -67,13 +150,19 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedCardIndex = null;
         gameActive = false;
 
-        const shuffledPool = [...LOVE_SENTENCES].sort(() => 0.5 - Math.random());
-        const selectedSentences = shuffledPool.slice(0, 9);
+        // Generate an array of indices [0...14] and shuffle them
+        const indices = Array.from({ length: 15 }, (_, i) => i);
+        indices.sort(() => 0.5 - Math.random());
 
-        selectedSentences.forEach((sentence, index) => {
+        // Save the first 9 shuffled indices so we can translate them on-the-fly later
+        currentShuffledSentences = indices.slice(0, 9);
+
+        currentShuffledSentences.forEach((sentenceIndex, displayIndex) => {
+            const sentence = TRANSLATIONS[currentLang].sentences[sentenceIndex];
+
             const card = document.createElement('div');
             card.className = 'card';
-            card.dataset.index = index;
+            card.dataset.index = displayIndex;
 
             const inner = document.createElement('div');
             inner.className = 'card-inner';
@@ -81,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const canvas = document.createElement('canvas');
             canvas.className = 'scratch-layer';
-            canvas.dataset.index = index;
+            canvas.dataset.index = displayIndex;
 
             card.appendChild(inner);
             card.appendChild(canvas);
@@ -90,13 +179,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Wait for DOM insertion and layout sizing
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
-                    setupScratchCanvas(canvas, card);
+                    setupScratchCanvas(canvas, card, TRANSLATIONS[currentLang].scratch_text);
                 });
             });
         });
     }
 
-    function setupScratchCanvas(canvas, containerElement) {
+    function setupScratchCanvas(canvas, containerElement, scratchText) {
         const ctx = canvas.getContext('2d');
         const width = containerElement.offsetWidth || 100;
         const height = containerElement.offsetHeight || 100;
@@ -118,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.font = 'bold 16px Montserrat';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('Зітри мене', width / 2, height / 2);
+        ctx.fillText(scratchText, width / 2, height / 2);
 
         let isDrawing = false;
         let isRevealed = false;
@@ -234,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetGame() {
         resultScreen.classList.remove('active');
         resultScreen.classList.add('hidden');
-        document.querySelector('.subtitle').textContent = "Вибери одну картку і дізнайся, що я відчуваю... 💝";
+        document.getElementById('subtitle-text').textContent = TRANSLATIONS[currentLang].subtitle_start;
         document.getElementById('result-text').textContent = "";
 
         startGame();
