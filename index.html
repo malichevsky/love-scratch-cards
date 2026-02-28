@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ff4b72">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    <title>Для тебе ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Pacifico&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1>Для мого кохання ❤️</h1>
+            <p class="subtitle">Вибери одну картку і дізнайся, що я відчуваю... 💝</p>
+        </header>
+
+        <div class="game-area">
+            <!-- Start overlay -->
+            <div id="start-screen" class="overlay active">
+                <button id="start-btn" class="primary-btn">Почати гру 💖</button>
+            </div>
+
+            <!-- Grid container for cards -->
+            <div id="card-grid" class="grid hidden">
+                <!-- Cards will be generated here by JS -->
+            </div>
+
+            <!-- Result/Restart overlay -->
+            <div id="result-screen" class="overlay hidden">
+                <p id="result-text" class="romantic-text"></p>
+                <button id="restart-btn" class="secondary-btn">Ще раз 💘</button>
+            </div>
+        </div>
+
+        <!-- Background decorative elements -->
+        <div id="floating-hearts" class="floating-hearts-container"></div>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('ServiceWorker registration successful'))
+                    .catch(err => console.log('ServiceWorker registration failed: ', err));
+            });
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

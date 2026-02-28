@@ -1,0 +1,22 @@
+{
+  "name": "Для тебе ❤️",
+  "short_name": "Для тебе",
+  "description": "Love Scratch Cards Game",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffb6c1",
+  "theme_color": "#ff4b72",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
