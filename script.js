@@ -106,7 +106,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function toggleLanguage() {
+        console.log(`[toggleLanguage] Switching language from ${currentLang}`);
         currentLang = currentLang === 'ua' ? 'en' : 'ua';
+        console.log(`[toggleLanguage] New language is ${currentLang}`);
         langBtn.textContent = currentLang === 'ua' ? '🇺🇦 UA' : '🇬🇧 EN';
         updateUIText();
 
@@ -137,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateUIText() {
+        console.log(`[updateUIText] Updating static UI text for ${currentLang}`);
         const t = TRANSLATIONS[currentLang];
         document.getElementById('title-text').textContent = t.title;
         document.getElementById('start-text').textContent = t.start_btn;
@@ -150,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function init() {
+        console.log('[init] Initializing game components, adding event listeners');
         createFloatingHearts();
         startBtn.addEventListener('click', startGame);
         restartBtn.addEventListener('click', resetGame);
@@ -157,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startGame() {
+        console.log('[startGame] Start button clicked, initializing game grid');
         startScreen.classList.remove('active');
         startScreen.classList.add('hidden');
         cardGrid.classList.remove('hidden');
@@ -174,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateCards() {
+        console.log('[generateCards] Generating new set of scratch cards');
         cardGrid.innerHTML = '';
         selectedCardIndex = null;
         gameActive = false;
@@ -257,6 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const cardIndex = canvas.dataset.index;
             if (selectedCardIndex === null) {
+                console.log(`[scratchStart] Card selected: ${cardIndex}`);
                 selectedCardIndex = cardIndex;
                 disableOtherCards(selectedCardIndex);
             } else if (selectedCardIndex !== cardIndex) {
@@ -280,6 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function handleEnd() {
             if (!isDrawing) return;
             isDrawing = false;
+            console.log('[scratchEnd] Finished scratching stroke, checking reveal percentage');
             checkReveal();
         }
 
@@ -307,6 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const percentage = (transparentPixels / Math.max(1, sampledPixels)) * 100;
 
             if (percentage > 45 && !isRevealed) {
+                console.log(`[checkReveal] Card completely revealed! Percentage: ${percentage.toFixed(2)}%`);
                 isRevealed = true;
                 canvas.style.transition = 'opacity 0.6s ease';
                 canvas.style.opacity = '0';
@@ -350,6 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function resetGame() {
+        console.log('[resetGame] Restarting the game completely');
         resultScreen.classList.remove('active');
         resultScreen.classList.add('hidden');
         document.getElementById('subtitle-text').textContent = TRANSLATIONS[currentLang].subtitle_start;
