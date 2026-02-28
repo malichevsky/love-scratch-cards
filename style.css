@@ -348,3 +348,39 @@ button {
         opacity: 0;
     }
 }
+
+/* Easter Egg */
+.easter-egg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 90%;
+    max-width: 320px;
+    background: white;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(255, 75, 114, 0.4);
+    text-align: center;
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.easter-egg.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -40%) scale(0.8);
+}
+
+.easter-egg.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.easter-egg img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}

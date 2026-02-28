@@ -43,8 +43,15 @@
 
         <!-- Background decorative elements -->
         <div id="floating-hearts" class="floating-hearts-container"></div>
+
+        <!-- Easter Egg Elements -->
+        <div id="easter-egg-container" class="easter-egg hidden">
+            <img src="misc/sixseven-pic.jpeg" alt="Surprise">
+        </div>
+        <audio id="easter-egg-audio" src="misc/sixseven-voice.mp3" preload="auto"></audio>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

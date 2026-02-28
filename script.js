@@ -187,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cardGrid.innerHTML = '';
         selectedCardIndex = null;
         gameActive = false;
+        window.easterEggTriggered = false;
 
         // Generate an array of indices [0...totalSentences.length-1] and shuffle them
         const totalSentences = TRANSLATIONS[currentLang].sentences.length;
@@ -321,6 +322,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (percentage > 45 && !isRevealed) {
                 console.log(`[checkReveal] Card completely revealed! Percentage: ${percentage.toFixed(2)}%`);
                 isRevealed = true;
+
+                // Easter Egg check at exactly 67% (rounded)
+                if (Math.round(percentage) === 67 && !window.easterEggTriggered) {
+                    window.easterEggTriggered = true;
+                    triggerEasterEgg();
+                }
+
                 canvas.style.transition = 'opacity 0.6s ease';
                 canvas.style.opacity = '0';
                 setTimeout(() => {
@@ -362,10 +370,69 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }
 
+    function triggerEasterEgg() {
+        console.log('[triggerEasterEgg] 67% reached! Triggering Easter Egg.');
+
+        // Confetti
+        if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#ff4b72', '#ffd8df', '#ffffff', '#d4af37'],
+                zIndex: 2000
+            });
+        }
+
+        // Audio
+        const audio = document.getElementById('easter-egg-audio');
+        if (audio) {
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log('Audio play blocked:', e));
+        }
+
+        // Image
+        const container = document.getElementById('easter-egg-container');
+        if (container) {
+            container.classList.remove('hidden');
+            container.classList.add('active');
+        }
+
+        // Hide after audio ends
+        if (audio) {
+            audio.onended = () => {
+                if (container) {
+                    container.classList.remove('active');
+                    container.classList.add('hidden');
+                }
+            };
+        } else {
+            // Fallback if audio fails to load or play
+            setTimeout(() => {
+                if (container) {
+                    container.classList.remove('active');
+                    container.classList.add('hidden');
+                }
+            }, 5000);
+        }
+    }
+
     function resetGame() {
         console.log('[resetGame] Restarting the game completely');
         resultScreen.classList.remove('active');
         resultScreen.classList.add('hidden');
+
+        const easterEggContainer = document.getElementById('easter-egg-container');
+        if (easterEggContainer) {
+            easterEggContainer.classList.remove('active');
+            easterEggContainer.classList.add('hidden');
+        }
+        const audio = document.getElementById('easter-egg-audio');
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+
         document.getElementById('subtitle-text').textContent = TRANSLATIONS[currentLang].subtitle_start;
         document.getElementById('result-text').textContent = "";
 
