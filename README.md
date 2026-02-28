@@ -29,6 +29,11 @@
 
 Це настільки особисто, що чіпає душу. Поєднуючи милі "Я тебе кохаю" з кумедними, саркастичними обіцянками (наприклад, обіцянкою швидше відповідати або частіше грати разом у Roblox/Minecraft), ви нагадуєте їй про всі ваші особливі спогади. Ця гра долає відстань, змушує сміятися і працює як маленькі "кишенькові обійми", які можна відкрити щоразу, коли вона сумує за вами! 🫂💝
 
+### 🤫 Секретний інгредієнт
+Спробуйте стерти картку рівно на 67%... 🤫
+
+Зроблено з любов'ю та недоспаними ночами разом з Antigravity IDE від Google❤️
+
 ---
 
 ## 🇬🇧 English
@@ -55,3 +60,8 @@ Here is what makes this app so amazing:
 Because it shows you care! Words are nice, but building a whole interactive game just for them? That is next-level romance. 🚀
 
 It is deeply personal. By mixing sweet "I love you" texts with funny, sarcastic promises (like promising to reply faster or playing Roblox and Minecraft together), you are reminding them of all your special memories. It bridges distances, makes them laugh, and acts as a constant little pocket-hug they can open anytime they miss you! 🫂💝
+
+### 🤫 Secret Ingredient
+Try scratching the card exactly to 67%... 🤫
+
+Made with love and sleepless nights with Antigravity IDE by Google ❤️
